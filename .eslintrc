@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "airbnb-base"
+  ],
+  "rules": {
+    "no-underscore-dangle": ["error", {
+      "allow": ["__Rewire__", "__ResetDependency__"]
+    }]
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  }
+}

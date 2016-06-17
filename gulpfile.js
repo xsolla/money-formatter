@@ -53,7 +53,7 @@ function build() {
   return gulp.src(path.join('src', config.entryFileName))
     .pipe(webpackStream({
       output: {
-        filename: `${exportFileName}.js`,
+        filename: exportFileName + '.js',
         libraryTarget: 'umd',
         library: config.mainVarName,
       },
@@ -73,7 +73,7 @@ function build() {
     }))
     .pipe(gulp.dest(destinationFolder))
     .pipe($.filter(['**', '!**/*.js.map']))
-    .pipe($.rename(`${exportFileName}.min.js`))
+    .pipe($.rename(exportFileName + '.min.js'))
     .pipe($.sourcemaps.init({ loadMaps: true }))
     .pipe($.uglify())
     .pipe($.sourcemaps.write('./'))

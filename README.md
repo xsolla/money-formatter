@@ -6,6 +6,8 @@ It allows you to format currencies without specifying any formatting arguments
 besides the currency code and number value itself, thanks to rules from the [currency-format](https://github.com/xsolla/currency-format) package.
 
 [![Travis build status](http://img.shields.io/travis/xsolla/money-formatter.svg?style=flat)](https://travis-ci.org/xsolla/money-formatter)
+[![npm version](https://badge.fury.io/js/money-formatter.svg)](https://badge.fury.io/js/money-formatter)
+[![Bower version](https://badge.fury.io/bo/money-formatter.svg)](https://badge.fury.io/bo/money-formatter)
 [![Dependency Status](https://david-dm.org/xsolla/money-formatter.svg)](https://david-dm.org/xsolla/money-formatter)
 [![devDependency Status](https://david-dm.org/xsolla/money-formatter/dev-status.svg)](https://david-dm.org/xsolla/money-formatter#info=devDependencies)
 

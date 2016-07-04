@@ -89,6 +89,14 @@ moneyFormatter.formatToHTML('SAR', -10); // => '<span dir="rtl">-10.00 ﷼</span
 It will look like
 <code dir="rtl">-10.00 ﷼</code>
 
+## Development
+
+1. Clone this repository
+2. Run `npm install` inside cloned repository directory to install dependencies
+3. To test the code during development run `npm test` to run tests once
+or use `npm run watch` to watch for changes and autorun tests
+4. Execute `npm run build` to build distributable files to the `dist/` dir
+
 ## License
 
 The MIT License.

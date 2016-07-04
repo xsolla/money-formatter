@@ -78,6 +78,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	/**
+	 * Return true if arguments are valid
+	 */
+	var validateCurrencyArgs = function validateCurrencyArgs(currencyCode, amount) {
+	  return typeof currencyCode === 'string' && (0, _utils.isNumeric)(amount);
+	};
+	
+	/**
 	 * Formats number based on the specified currency params
 	 * @param  {string} currencyCode            Currency alphabetic code in ISO 4217 format, e.g. 'USD'
 	 * @param  {number} amount                  Currency amount
@@ -89,7 +96,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @return {string}                         Formatted string
 	 */
 	var format = exports.format = function format(currencyCode, amount, fractionSize, useAlphaCode) {
-	  if (typeof currencyCode !== 'string' || !(0, _utils.isNumeric)(amount)) {
+	  if (!validateCurrencyArgs(currencyCode, amount)) {
 	    return '';
 	  }
 	  var currency = getCurrencyData(currencyCode);
@@ -135,6 +142,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return false;
 	};
 	
+	var currencyHTMLTemplate = function currencyHTMLTemplate(options) {
+	  var _options$formattedCur = options.formattedCurrency;
+	  var formattedCurrency = _options$formattedCur === undefined ? '' : _options$formattedCur;
+	  var _options$isRTL = options.isRTL;
+	  var isRTL = _options$isRTL === undefined ? false : _options$isRTL;
+	
+	  return '<span dir="' + (isRTL ? 'rtl' : 'ltr') + '">' + formattedCurrency + '</span>';
+	};
+	
 	/**
 	 * Same as `format` but outputs string with HTML element for proper
 	 * bidirectional output in browsers.
@@ -144,9 +160,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @return {string} HTML element with formatted currency as a string
 	 */
 	var formatToHTML = exports.formatToHTML = function formatToHTML() {
-	  var formattedCurrency = format.apply(undefined, arguments);
-	  var code = arguments.length <= 0 ? undefined : arguments[0];
-	  return '<span dir="' + (isRTLCurrency(code) ? 'rtl' : 'ltr') + '">' + formattedCurrency + '</span>';
+	  if (validateCurrencyArgs.apply(undefined, arguments)) {
+	    var formattedCurrency = format.apply(undefined, arguments);
+	    var code = arguments.length <= 0 ? undefined : arguments[0];
+	    return currencyHTMLTemplate({
+	      formattedCurrency: formattedCurrency,
+	      isRTL: isRTLCurrency(code)
+	    });
+	  }
+	  return currencyHTMLTemplate({
+	    formattedCurrency: '',
+	    isRTL: false
+	  });
 	};
 	
 	exports.default = {

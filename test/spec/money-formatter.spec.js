@@ -4,8 +4,7 @@ import moneyFormatter, {
   formatSimple,
 } from '../../src/money-formatter';
 
-const getTextContent = (htmlString) =>
-  htmlString.match(/>(.+)<\//)[1];
+import { getTextContent, errorArgs } from '../_test-utils';
 
 describe('moneyFormatter', () => {
   describe('format', () => {
@@ -67,6 +66,13 @@ describe('moneyFormatter', () => {
       expect(format('USD', 10, undefined, true)).to.equal('10.00 USD');
     });
 
+    it('shouldn\'t throw nonsensical error null and undefined in required args', () => {
+      errorArgs.forEach((args) => {
+        expect(() => format(...args), `format with args: ${JSON.stringify(args)}`)
+        .to.not.throw(Error);
+      });
+    });
+
     // TODO: Support rtl currencies for string formatting
     // Right now it's not supported, because it will break HTML formatting
     it.skip('should support rtl currencies', () => {
@@ -114,6 +120,13 @@ describe('moneyFormatter', () => {
         .to.equal(getTextContent(formatToHTML('__LTR', 10)));
       moneyFormatter.__ResetDependency__('currencyFormatData');
     });
+
+    it('shouldn\'t throw nonsensical error null and undefined in required args', () => {
+      errorArgs.forEach((args) => {
+        expect(() => formatToHTML(...args), `format with args: ${JSON.stringify(args)}`)
+        .to.not.throw(Error);
+      });
+    });
   });
 
   describe('formatSimple', () => {
@@ -128,6 +141,13 @@ describe('moneyFormatter', () => {
     it('should round to n digits after dot', () => {
       expect(formatSimple('USD', 1.2345, 3)).to.equal('1.234 USD');
       expect(formatSimple('USD', 1.23456, 4)).to.equal('1.2346 USD');
+    });
+
+    it('shouldn\'t throw nonsensical error null and undefined in required args', () => {
+      errorArgs.forEach((args) => {
+        expect(() => formatSimple(...args), `format with args: ${JSON.stringify(args)}`)
+        .to.not.throw(Error);
+      });
     });
   });
 

@@ -8,6 +8,12 @@ export const formatSimple = (currencyName, amount, fractionSize) =>
   `${formatDigits(amount, fractionSize)} ${currencyName}`;
 
 /**
+ * Return true if arguments are valid
+ */
+const validateCurrencyArgs = (currencyCode, amount) =>
+  typeof currencyCode === 'string' && isNumeric(amount);
+
+/**
  * Formats number based on the specified currency params
  * @param  {string} currencyCode            Currency alphabetic code in ISO 4217 format, e.g. 'USD'
  * @param  {number} amount                  Currency amount
@@ -19,7 +25,7 @@ export const formatSimple = (currencyName, amount, fractionSize) =>
  * @return {string}                         Formatted string
  */
 export const format = (currencyCode, amount, fractionSize, useAlphaCode) => {
-  if (typeof currencyCode !== 'string' || !isNumeric(amount)) {
+  if (!validateCurrencyArgs(currencyCode, amount)) {
     return '';
   }
   const currency = getCurrencyData(currencyCode);
@@ -69,6 +75,11 @@ const isRTLCurrency = (currencyCode) => {
   return false;
 };
 
+const currencyHTMLTemplate = (options) => {
+  const { formattedCurrency = '', isRTL = false } = options;
+  return `<span dir="${isRTL ? 'rtl' : 'ltr'}">${formattedCurrency}</span>`;
+};
+
 /**
  * Same as `format` but outputs string with HTML element for proper
  * bidirectional output in browsers.
@@ -78,9 +89,18 @@ const isRTLCurrency = (currencyCode) => {
  * @return {string} HTML element with formatted currency as a string
  */
 export const formatToHTML = (...args) => {
-  const formattedCurrency = format(...args);
-  const code = args[0];
-  return `<span dir="${isRTLCurrency(code) ? 'rtl' : 'ltr'}">${formattedCurrency}</span>`;
+  if (validateCurrencyArgs(...args)) {
+    const formattedCurrency = format(...args);
+    const code = args[0];
+    return currencyHTMLTemplate({
+      formattedCurrency,
+      isRTL: isRTLCurrency(code),
+    });
+  }
+  return currencyHTMLTemplate({
+    formattedCurrency: '',
+    isRTL: false,
+  });
 };
 
 export default {

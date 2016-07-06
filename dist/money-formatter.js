@@ -137,7 +137,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var currencyObj = getCurrencyData(currencyCode);
 	  if (currencyObj) {
 	    var symbol = currencyObj.symbol || currencyObj.uniqSymbol;
-	    return symbol.rtl;
+	    // If symbol data is found, return it, else mark the currency as 'ltr'
+	    return symbol ? symbol.rtl : false;
 	  }
 	  return false;
 	};
@@ -461,6 +462,16 @@ return /******/ (function(modules) { // webpackBootstrap
 				"rtl": false
 			}
 		},
+		"BYN": {
+			"name": "Belarussian Ruble",
+			"fractionSize": 0,
+			"symbol": {
+				"grapheme": "p.",
+				"template": "1 $",
+				"rtl": false
+			},
+			"uniqSymbol": null
+		},
 		"BYR": {
 			"name": "Belarussian Ruble",
 			"fractionSize": 0,
@@ -469,11 +480,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				"template": "1 $",
 				"rtl": false
 			},
-			"uniqSymbol": {
-				"grapheme": "p.",
-				"template": "1 $",
-				"rtl": false
-			}
+			"uniqSymbol": null
 		},
 		"BZD": {
 			"name": "Belize Dollar",
@@ -2166,7 +2173,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var numberFormat = exports.numberFormat = function numberFormat(number, dec, dsep, tsep) {
 	  if (isNaN(number) || number == null) return '';
 	
-	  var numberStr = number.toFixed(~ ~dec);
+	  var numberStr = number.toFixed(~~dec);
 	  var groupSep = typeof tsep === 'string' ? tsep : ',';
 	
 	  var parts = numberStr.split('.');

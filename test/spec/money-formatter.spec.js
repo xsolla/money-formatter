@@ -73,6 +73,10 @@ describe('moneyFormatter', () => {
       });
     });
 
+    it('should handle official currencies without `symbol` or `uniqSymbol` data', () => {
+      expect(format('MDL', 123.45)).to.equal('123.45 MDL');
+    });
+
     // TODO: Support rtl currencies for string formatting
     // Right now it's not supported, because it will break HTML formatting
     it.skip('should support rtl currencies', () => {
@@ -126,6 +130,10 @@ describe('moneyFormatter', () => {
         expect(() => formatToHTML(...args), `format with args: ${JSON.stringify(args)}`)
         .to.not.throw(Error);
       });
+    });
+
+    it('should handle official currencies without `symbol` or `uniqSymbol` data', () => {
+      expect(formatToHTML('MDL', 123.45)).to.equal('<span dir="ltr">123.45 MDL</span>');
     });
   });
 

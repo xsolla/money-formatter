@@ -70,7 +70,8 @@ const isRTLCurrency = (currencyCode) => {
   const currencyObj = getCurrencyData(currencyCode);
   if (currencyObj) {
     const symbol = currencyObj.symbol || currencyObj.uniqSymbol;
-    return symbol.rtl;
+    // If symbol data is found, return it, else mark the currency as 'ltr'
+    return symbol ? symbol.rtl : false;
   }
   return false;
 };

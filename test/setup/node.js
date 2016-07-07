@@ -1,7 +1,9 @@
+/* eslint-disable import/no-extraneous-dependencies */
 global.chai = require('chai');
 
 require('babel-core/register');
 require('./setup')();
+/* eslint-enable import/no-extraneous-dependencies */
 
 /*
 	Uncomment the following if your library uses features of the DOM,

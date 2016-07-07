@@ -4,6 +4,7 @@ const loadPlugins = require('gulp-load-plugins');
 const del = require('del');
 const glob = require('glob');
 const path = require('path');
+const istanbul = require('gulp-istanbul');;
 const isparta = require('isparta');
 const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
@@ -106,11 +107,11 @@ function test() {
 function coverage(done) {
   registerBabel();
   gulp.src(['src/**/*.js'])
-    .pipe($.istanbul({ instrumenter: Instrumenter }))
-    .pipe($.istanbul.hookRequire())
+    .pipe(istanbul({ instrumenter: Instrumenter }))
+    .pipe(istanbul.hookRequire())
     .on('finish', function() {
       test()
-        .pipe($.istanbul.writeReports())
+        .pipe(istanbul.writeReports())
         .on('end', done)
     });
 }

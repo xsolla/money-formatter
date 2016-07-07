@@ -160,6 +160,7 @@ describe('moneyFormatter', () => {
   });
 
   it('exports both full module and inidividual functions', () => {
+    // eslint-disable-next-line import/no-named-as-default-member
     expect(moneyFormatter.format).to.equal(format);
   });
 });

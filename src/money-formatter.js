@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import currencyFormatData from 'currency-format';
 import { formatDigits, isNumeric } from './utils';
 

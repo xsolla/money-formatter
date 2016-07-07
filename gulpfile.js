@@ -7,6 +7,7 @@ const path = require('path');
 const isparta = require('isparta');
 const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
+const env = require('gulp-env');
 
 const Instrumenter = isparta.Instrumenter;
 const mochaGlobals = require('./test/setup/.globals');
@@ -90,10 +91,11 @@ function mocha() {
 }
 
 function registerBabel() {
-  // Add reqire plugin only for test builds
-  require('babel-register')({
-    plugins: ['babel-plugin-rewire']
+  // Register babel for test runners and coverage reporters
+  env.set({
+    BABEL_ENV: 'test'
   });
+  require('babel-register');
 }
 
 function test() {

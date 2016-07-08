@@ -78,7 +78,7 @@ const isRTLCurrency = (currencyCode) => {
 };
 
 const currencyHTMLTemplate = (options) => {
-  const { formattedCurrency = '', isRTL = false } = options;
+  const { formattedCurrency, isRTL } = options;
   return `<span dir="${isRTL ? 'rtl' : 'ltr'}">${formattedCurrency}</span>`;
 };
 
@@ -91,9 +91,9 @@ const currencyHTMLTemplate = (options) => {
  * @return {string} HTML element with formatted currency as a string
  */
 export const formatToHTML = (...args) => {
-  if (validateCurrencyArgs(...args)) {
+  const [code, amount] = args;
+  if (validateCurrencyArgs(code, amount)) {
     const formattedCurrency = format(...args);
-    const code = args[0];
     return currencyHTMLTemplate({
       formattedCurrency,
       isRTL: isRTLCurrency(code),

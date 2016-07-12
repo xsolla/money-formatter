@@ -69,9 +69,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// eslint-disable-next-line import/no-extraneous-dependencies
-	
-	
 	var getCurrencyData = function getCurrencyData(code) {
 	  return _currencyFormat2.default[code.toUpperCase()];
 	};

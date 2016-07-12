@@ -69,6 +69,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	// eslint-disable-next-line import/no-extraneous-dependencies
+	
+	
 	var getCurrencyData = function getCurrencyData(code) {
 	  return _currencyFormat2.default[code.toUpperCase()];
 	};
@@ -144,10 +147,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	var currencyHTMLTemplate = function currencyHTMLTemplate(options) {
-	  var _options$formattedCur = options.formattedCurrency;
-	  var formattedCurrency = _options$formattedCur === undefined ? '' : _options$formattedCur;
-	  var _options$isRTL = options.isRTL;
-	  var isRTL = _options$isRTL === undefined ? false : _options$isRTL;
+	  var formattedCurrency = options.formattedCurrency;
+	  var isRTL = options.isRTL;
 	
 	  return '<span dir="' + (isRTL ? 'rtl' : 'ltr') + '">' + formattedCurrency + '</span>';
 	};
@@ -161,9 +162,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @return {string} HTML element with formatted currency as a string
 	 */
 	var formatToHTML = exports.formatToHTML = function formatToHTML() {
-	  if (validateCurrencyArgs.apply(undefined, arguments)) {
-	    var formattedCurrency = format.apply(undefined, arguments);
-	    var code = arguments.length <= 0 ? undefined : arguments[0];
+	  for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	    args[_key] = arguments[_key];
+	  }
+	
+	  var code = args[0];
+	  var amount = args[1];
+	
+	  if (validateCurrencyArgs(code, amount)) {
+	    var formattedCurrency = format.apply(undefined, args);
 	    return currencyHTMLTemplate({
 	      formattedCurrency: formattedCurrency,
 	      isRTL: isRTLCurrency(code)
@@ -2189,7 +2196,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	var isNumeric = exports.isNumeric = function isNumeric(n) {
-	  return !Number.isNaN(Number.parseFloat(n)) && Number.isFinite(n);
+	  return !isNaN(parseFloat(n)) && isFinite(n);
 	};
 
 /***/ }

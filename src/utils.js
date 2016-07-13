@@ -18,4 +18,4 @@ export const formatDigits = (number, fractionSize = 2) =>
   numberFormat(number, fractionSize, '.', ',');
 
 export const isNumeric = (n) =>
-  !Number.isNaN(Number.parseFloat(n)) && Number.isFinite(n);
+  !isNaN(parseFloat(n)) && isFinite(n);

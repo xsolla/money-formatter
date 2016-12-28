@@ -69,6 +69,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	// eslint-disable-next-line import/no-extraneous-dependencies,import/extensions
 	var getCurrencyData = function getCurrencyData(code) {
 	  return _currencyFormat2.default[code.toUpperCase()];
 	};
@@ -144,8 +145,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	var currencyHTMLTemplate = function currencyHTMLTemplate(options) {
-	  var formattedCurrency = options.formattedCurrency;
-	  var isRTL = options.isRTL;
+	  var formattedCurrency = options.formattedCurrency,
+	      isRTL = options.isRTL;
 	
 	  return '<span dir="' + (isRTL ? 'rtl' : 'ltr') + '">' + formattedCurrency + '</span>';
 	};
@@ -163,8 +164,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    args[_key] = arguments[_key];
 	  }
 	
-	  var code = args[0];
-	  var amount = args[1];
+	  var code = args[0],
+	      amount = args[1];
 	
 	  if (validateCurrencyArgs(code, amount)) {
 	    var formattedCurrency = format.apply(undefined, args);
@@ -474,7 +475,11 @@ return /******/ (function(modules) { // webpackBootstrap
 				"template": "1 $",
 				"rtl": false
 			},
-			"uniqSymbol": null
+			"uniqSymbol": {
+				"grapheme": "р.",
+				"template": "1 $",
+				"rtl": false
+			}
 		},
 		"BYR": {
 			"name": "Belarussian Ruble",
@@ -484,7 +489,11 @@ return /******/ (function(modules) { // webpackBootstrap
 				"template": "1 $",
 				"rtl": false
 			},
-			"uniqSymbol": null
+			"uniqSymbol": {
+				"grapheme": "р.",
+				"template": "1 $",
+				"rtl": false
+			}
 		},
 		"BZD": {
 			"name": "Belize Dollar",
@@ -2171,12 +2180,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
 	// Copied and adapted from underscore.string
 	// https://github.com/epeli/underscore.string/blob/2f78f0d6e36d553484a1bf5fe5ed1998f013dea5/numberFormat.js
 	var numberFormat = exports.numberFormat = function numberFormat(number, dec, dsep, tsep) {
 	  if (isNaN(number) || number == null) return '';
 	
+	  // eslint-disable-next-line no-bitwise
 	  var numberStr = number.toFixed(~~dec);
 	  var groupSep = typeof tsep === 'string' ? tsep : ',';
 	
@@ -2188,7 +2197,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	var formatDigits = exports.formatDigits = function formatDigits(number) {
-	  var fractionSize = arguments.length <= 1 || arguments[1] === undefined ? 2 : arguments[1];
+	  var fractionSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
 	  return numberFormat(number, fractionSize, '.', ',');
 	};
 	

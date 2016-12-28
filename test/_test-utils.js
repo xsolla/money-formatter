@@ -1,5 +1,4 @@
-export const getTextContent = (htmlString) =>
-  htmlString.match(/>(.+)<\//)[1];
+export const getTextContent = htmlString => htmlString.match(/>(.+)<\//)[1];
 
 // Generate all posible permutations with repetitions
 const getPermutations = (elements) => {
@@ -9,7 +8,7 @@ const getPermutations = (elements) => {
       permutations.push(arr);
       return;
     }
-    for (let i = 0; i < elements.length; i++) {
+    for (let i = 0; i < elements.length; i += 1) {
       permutate(arr.concat([elements[i]]));
     }
   }

@@ -1,9 +1,8 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+// eslint-disable-next-line import/no-extraneous-dependencies,import/extensions
 import currencyFormatData from 'currency-format';
 import { formatDigits, isNumeric } from './utils';
 
-const getCurrencyData = (code) =>
-  currencyFormatData[code.toUpperCase()];
+const getCurrencyData = code => currencyFormatData[code.toUpperCase()];
 
 export const formatSimple = (currencyName, amount, fractionSize) =>
   `${formatDigits(amount, fractionSize)} ${currencyName}`;

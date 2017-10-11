@@ -2,7 +2,7 @@
 import currencyFormatData from 'currency-format';
 import { formatDigits, isNumeric } from './utils';
 
-const getCurrencyData = (code) =>
+const getCurrencyData = code =>
   currencyFormatData[code.toUpperCase()];
 
 export const formatSimple = (currencyName, amount, fractionSize) => {

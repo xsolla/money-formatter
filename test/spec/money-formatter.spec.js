@@ -69,7 +69,7 @@ describe('moneyFormatter', () => {
     it('shouldn\'t throw nonsensical error null and undefined in required args', () => {
       errorArgs.forEach((args) => {
         expect(() => format(...args), `format with args: ${JSON.stringify(args)}`)
-        .to.not.throw(Error);
+          .to.not.throw(Error);
       });
     });
 
@@ -128,7 +128,7 @@ describe('moneyFormatter', () => {
     it('shouldn\'t throw nonsensical error null and undefined in required args', () => {
       errorArgs.forEach((args) => {
         expect(() => formatToHTML(...args), `format with args: ${JSON.stringify(args)}`)
-        .to.not.throw(Error);
+          .to.not.throw(Error);
       });
     });
 
@@ -160,7 +160,7 @@ describe('moneyFormatter', () => {
     it('shouldn\'t throw nonsensical error null and undefined in required args', () => {
       errorArgs.forEach((args) => {
         expect(() => formatSimple(...args), `format with args: ${JSON.stringify(args)}`)
-        .to.not.throw(Error);
+          .to.not.throw(Error);
       });
     });
   });

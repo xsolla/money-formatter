@@ -151,6 +151,12 @@ describe('moneyFormatter', () => {
       expect(formatSimple('USD', 1.23456, 4)).to.equal('1.2346 USD');
     });
 
+    it('should not add whitespace if currency is left blank', () => {
+      expect(formatSimple('', 42)).to.equal('42.00');
+      expect(formatSimple('', 42.97)).to.equal('42.97');
+      expect(formatSimple('', 42, 0)).to.equal('42');
+    });
+
     it('shouldn\'t throw nonsensical error null and undefined in required args', () => {
       errorArgs.forEach((args) => {
         expect(() => formatSimple(...args), `format with args: ${JSON.stringify(args)}`)

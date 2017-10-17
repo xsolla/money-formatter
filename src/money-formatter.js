@@ -6,13 +6,9 @@ const getCurrencyData = code =>
   currencyFormatData[code.toUpperCase()];
 
 export const formatSimple = (currencyName, amount, fractionSize) => {
-  const result = [];
-  result.push(formatDigits(amount, fractionSize));
-  if (currencyName && currencyName !== '') {
-    result.push(currencyName);
-  }
-
-  return result.join(' ');
+  const value = formatDigits(amount, fractionSize);
+  const currency = currencyName ? ` ${currencyName}` : '';
+  return value + currency;
 };
 
 /**

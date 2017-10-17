@@ -78,6 +78,13 @@ moneyFormatter.format('USD', 10, 0, true); // => '10 USD'
 moneyFormatter.formatSimple('$$$', 123, 0); // => '123 $$$'
 ```
 
+If `currencyCode` is set to an empty string there will be no currency symbol
+or alpha code.
+
+```javascript
+moneyFormatter.formatSimple('', 1234.13, 2); // => '1,234.13'
+```
+
 #### formatToHTML(currencyCode, amount, [fractionSize=2, useAlphaCode=false]) => string
 
 Same as `format` but outputs string with HTML element for proper bidirectional
